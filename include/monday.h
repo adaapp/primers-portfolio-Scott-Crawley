@@ -54,6 +54,35 @@ void fahrenheitCentigradeConversion(void) {
 }
 
 void selfServiceCheckout(void) {
-	std::cout << " - selfServiceCheckout: not yet implemented\n\n";
-}
 
+	using namespace std;
+
+  int itemNum     = 1;
+  int quantity    = 0;
+  float cost      = 0.0;
+  float subtotal  = 0.0;
+  float tax       = 0.0;
+  string input    = "1";
+
+  // Prompt user continuously until they enter 0
+  while (stoi(input) != 0) {
+    cout << "Please enter a quantity for item " << itemNum << " (or 0 to finish): ";
+    cin >> input;
+    quantity = stoi(input);
+    cout << "Please enter item " << input << "'s cost: ";
+    cin >> input;
+    cost = stof(input);
+    
+    subtotal += (quantity * cost);
+    itemNum++;
+  }
+
+  // Calculate tax
+  tax = subtotal * (5.5 / 100);
+
+  // Output
+  cout << "Thank you.\n";
+  cout << "Subtotal: £" << subtotal << "\n";
+  cout << "Shopping Tax: £" << tax << "\n";
+  cout << "Total: £" << subtotal + tax;
+}
