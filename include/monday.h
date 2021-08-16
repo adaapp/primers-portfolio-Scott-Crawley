@@ -58,14 +58,14 @@ void selfServiceCheckout(void) {
 	using namespace std;
 
   int itemNum     = 1;
-  int quantity    = 0;
+  int quantity    = 1;
   float cost      = 0.0;
   float subtotal  = 0.0;
   float tax       = 0.0;
   string input    = "1";
 
   // Prompt user continuously until they enter 0
-  while (stoi(input) != 0) {
+  while (quantity != 0) {
     cout << "Please enter a quantity for item " << itemNum << " (or 0 to finish): ";
     cin >> input;
     quantity = stoi(input);
