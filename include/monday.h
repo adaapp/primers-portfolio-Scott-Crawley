@@ -1,6 +1,26 @@
 #include <ctype.h>
 #include <math.h>
 
+/* Fahrenheit to Centigrade */
+float ftoc(float temp) {
+  return (temp - 32) * 5 / 9;
+}
+
+/* Centigrade to Fahrenheit */
+float ctof(float temp) {
+  return (temp * 9 / 5) + 32;
+}
+
+/* Fahrenheit to Kelvin */
+float ftok(float temp) {
+  return (temp + 459.67) * 5 / 9;
+}
+
+/* Centigrade to Kelvin */
+float ctok(float temp) {
+  return temp + 273.15;
+}
+
 void fahrenheitCentigradeConversion(void) {
 
   using namespace std;
@@ -24,33 +44,37 @@ void fahrenheitCentigradeConversion(void) {
     }
   }
 
-  // Conversion mode and choice evaluation (with case insensitivity)
+  // Conversion mode
   cout << "\nPress 'C' to convert from Fahrenheit to Centigrade.\n";
   cout << "Press 'F' to convert from Centigrade to Fahrenheit.\n\n";
   cout << "Your choice: ";
-
   cin >> choice;
+  
+  // Choice evaluation (with case insensitivity)
   choice = tolower(choice);
-  if (choice == 'c') {
-    conv = (temp - 32) * 5 / 9;
-    kelv = conv + 273.15;
-    cout << temp << " degrees Fahrenheit is " << conv << " Centigrade\n";
-    cout << "Or " << kelv << " Kelvin\n";
-    if (conv < -273.15) {
-      cout << "Breaks the laws of physics!\n";
-    }
-  } 
-  else if (choice == 'f') {
-    conv = (temp * 9 / 5) + 32;
-    kelv = (conv + 459.67) * 5 / 9;
-    cout << temp << " degrees Centigrade is " << conv << " Fahrenheit\n";
-    cout << "Or " << kelv << " Kelvin\n";
-    if (conv < -459.67) {
-      cout << "Breaks the laws of physics!\n";
-    }
-  } 
-  else {
-    cout << "Not a valid option\n";
+  switch (choice) {
+    case 'c':
+      conv = ftoc(temp);
+      kelv = ftok(temp);
+
+      cout << temp << " degrees Fahrenheit is " << conv << " Centigrade\n";
+      cout << "Or " << kelv << " Kelvin\n";
+      if (conv < -273.15) {
+        cout << "Breaks the laws of physics!\n";
+      }
+      break;
+    case 'f':
+      conv = ctof(temp);
+      kelv = ctok(temp);
+
+      cout << temp << " degrees Centigrade is " << conv << " Fahrenheit\n";
+      cout << "Or " << kelv << " Kelvin\n";
+      if (conv < -459.67) {
+        cout << "Breaks the laws of physics!\n";
+      }
+      break;
+    default:
+      cout << "Not a valid option\n";
   }
 }
 
