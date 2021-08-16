@@ -6,7 +6,7 @@ void fahrenheitCentigradeConversion(void) {
  
   float temp  = 0.0;
   float conv  = 0.0;
-  int   kelv  = 0.0;
+  long  kelv  = 0.0;
   string inp  = "0";
   char choice = '0';
 
