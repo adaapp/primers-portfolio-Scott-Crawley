@@ -1,10 +1,12 @@
 #include <ctype.h>
 
 void fahrenheitCentigradeConversion(void) {
+
   using namespace std;
  
   float temp  = 0.0;
   float conv  = 0.0;
+  int   kelv  = 0.0;
   string inp  = "0";
   char choice = '0';
 
@@ -13,7 +15,7 @@ void fahrenheitCentigradeConversion(void) {
   while (true) {
     try {
       cin >> inp;
-      temp = stoi(inp);
+      temp = stof(inp);
       break;
     } 
     catch (invalid_argument ignored) {
@@ -30,14 +32,18 @@ void fahrenheitCentigradeConversion(void) {
   choice = tolower(choice);
   if (choice == 'c') {
     conv = (temp - 32) * 5 / 9;
+    kelv = conv + 273.15;
     cout << temp << " degrees Fahrenheit is " << conv << " Centigrade\n";
+    cout << "Or " << kelv << " Kelvin\n";
     if (conv < -273.15) {
       cout << "Breaks the laws of physics!\n";
     }
   } 
   else if (choice == 'f') {
     conv = (temp * 9 / 5) + 32;
+    kelv = (conv + 459.67) * 5 / 9;
     cout << temp << " degrees Centigrade is " << conv << " Fahrenheit\n";
+    cout << "Or " << kelv << " Kelvin\n";
     if (conv < -459.67) {
       cout << "Breaks the laws of physics!\n";
     }
