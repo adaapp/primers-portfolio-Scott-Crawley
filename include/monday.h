@@ -1,4 +1,5 @@
 #include <ctype.h>
+#include <math.h>
 
 void fahrenheitCentigradeConversion(void) {
 
@@ -61,6 +62,7 @@ void selfServiceCheckout(void) {
   int quantity    = 1;
   float cost      = 0.0;
   float subtotal  = 0.0;
+  float total     = 0.0;
   float tax       = 0.0;
   string input    = "1";
 
@@ -69,20 +71,26 @@ void selfServiceCheckout(void) {
     cout << "Please enter a quantity for item " << itemNum << " (or 0 to finish): ";
     cin >> input;
     quantity = stoi(input);
-    cout << "Please enter item " << input << "'s cost: ";
-    cin >> input;
-    cost = stof(input);
-    
-    subtotal += (quantity * cost);
-    itemNum++;
+
+    // Ensure it doesn't prompt for a price if they enter 0 for quantity
+    if (quantity != 0) {
+      cout << "Please enter item " << itemNum << "'s cost: ";
+      cin >> input;
+      cost = stof(input);
+      
+      subtotal += (quantity * cost);
+      itemNum++;
+    }
   }
 
-  // Calculate tax
-  tax = subtotal * (5.5 / 100);
+  // Calculate final values (and format to 2dp for subtotal)
+  subtotal  = roundf(subtotal * 100) / 100;
+  tax       = roundf(subtotal * (5.5 / 100) * 100) / 100;
+  total     = roundf((subtotal + tax) * 100) / 100;
 
   // Output
-  cout << "Thank you.\n";
+  cout << "Thank you.\n\n";
   cout << "Subtotal: £" << subtotal << "\n";
-  cout << "Shopping Tax: £" << tax << "\n";
-  cout << "Total: £" << subtotal + tax;
+  cout << "Shopping Tax: £" << tax << "\n\n";
+  cout << "Total: £" << total << "\n\n";
 }
