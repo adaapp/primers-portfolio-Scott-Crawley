@@ -61,10 +61,11 @@ void passwordComplexityChecker(void) {
   std::cout << "The password '" << pwd << "' is " << strength;
 }
 
-void printEmployees(std::string* employees) {
-  std::cout << "There are " << employees->length() << " employees:";
-  for (int i = 0; i < 5; i++) {
-    std::cout << employees[i];
+void printEmployees(std::vector<std::string> employees) {
+  int len = employees.size();
+  std::cout << "\nThere are " << len << " employees:\n";
+  for (std::string e : employees) {
+    std::cout << e << std::endl;
   }
 }
 
@@ -72,14 +73,18 @@ void employeeListRemoval(void) {
 	using namespace std;
 
   string input;
-  string employees[] = { "John Smith", "Jaelynn Stuart", "Kaley Barajas", 
-                         "Walter Collier", "Cale Myers" };
+  vector<string> employees = { "John Smith", "Jaelynn Stuart", "Kaley Barajas", 
+                               "Walter Collier", "Cale Myers" };
 
   printEmployees(employees);  
 
-  cout << "Enter an employee name to remove: ";
-  cin >> input;
-  remove(begin(employees), end(employees), input);
+  cout << "\nEnter an employee name to remove: ";
+  getline(cin, input);
+  
+  auto it = find(employees.begin(), employees.end(), input);
+  if (it != employees.end()) {
+    employees.erase(it);
+  }
   
   printEmployees(employees);
 }
