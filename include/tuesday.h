@@ -61,6 +61,25 @@ void passwordComplexityChecker(void) {
   std::cout << "The password '" << pwd << "' is " << strength;
 }
 
+void printEmployees(std::string* employees) {
+  std::cout << "There are " << employees->length() << " employees:";
+  for (int i = 0; i < 5; i++) {
+    std::cout << employees[i];
+  }
+}
+
 void employeeListRemoval(void) {
-	std::cout << " - employeeListRemoval: not yet implemented\n\n";
+	using namespace std;
+
+  string input;
+  string employees[] = { "John Smith", "Jaelynn Stuart", "Kaley Barajas", 
+                         "Walter Collier", "Cale Myers" };
+
+  printEmployees(employees);  
+
+  cout << "Enter an employee name to remove: ";
+  cin >> input;
+  remove(begin(employees), end(employees), input);
+  
+  printEmployees(employees);
 }
