@@ -11,7 +11,7 @@ To help complete this challenge I needed to break the overall problem down into 
 * Create a method to convert C->F
  
 #### Reflection (as well as issues, challenges & resolutions)
-The biggest issue was related to testing the areas my solution failed, originally, I tested to see if it worked - however, it wasn’t until I tried to break it that I found some of the more serious issues with my design and implementation.  For example, ...
+I had no significant issues or challenges with this primer. Only the introduction of Kelvin proved more complex than I anticipated. Were I to add another option for the user to choose Kelvin -> Centigrade/Fahrenheit conversion, I would've needed to add **4 additional** functions and another case in the switch. Instead, to reduce complexity and lines of code, I added Kelvin conversion within the existing Fahrenheit/Centigrade converters; requiring only two functions instead.
 
 ### Primer 2 - Self-service Checkout
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ac elit in magna porttitor convallis. Ut eu justo rutrum, luctus lorem a, pretium quam. Sed ut commodo lectus. Vestibulum ut ligula lorem. Nulla mattis varius ex ac luctus. Aenean nec laoreet enim. Sed lorem erat, vestibulum ut faucibus vel, pellentesque nec felis. Vivamus metus tellus, pretium eu sodales interdum, fringilla ut mauris. ....
