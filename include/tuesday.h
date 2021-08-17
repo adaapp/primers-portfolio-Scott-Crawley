@@ -1,34 +1,10 @@
 #include <ctype.h>
 
-void passwordComplexityChecker(void) {
-  std::string pwd;
-  std::string strength;
-
-	std::cout << "Enter a password: ";
-  std::cin >> pwd;
-
-  switch (calculatePasswordStrength(pwd)) {
-    case 1:
-      strength = "Weak";
-      break;
-    case 2:
-      strength = "Moderate";
-      break;
-    case 3:
-      strength = "Strong";
-      break;
-    case 4:
-      strength = "Very Strong";
-      break;
-    default:
-      strength = "U broke it";
-  }
-  std::cout << "The password '" << pwd << "' is " << strength;
-}
-
 int calculatePasswordStrength(std::string pwd) {
-  int length, alphabetic, digit, special;
-  length = pwd.length();
+  int alphabetic  = 0;
+  int digit       = 0; 
+  int special     = 0;
+  int length      = pwd.length();
 
   // <ctype.h> isalpha / isdigit
   for (int i = 0; i < length; i++) {
@@ -59,6 +35,31 @@ int calculatePasswordStrength(std::string pwd) {
   return 1;
 }
 
+void passwordComplexityChecker(void) {
+  std::string pwd;
+  std::string strength;
+
+	std::cout << "Enter a password: ";
+  std::cin >> pwd;
+
+  switch (calculatePasswordStrength(pwd)) {
+    case 1:
+      strength = "Weak";
+      break;
+    case 2:
+      strength = "Moderate";
+      break;
+    case 3:
+      strength = "Strong";
+      break;
+    case 4:
+      strength = "Very Strong";
+      break;
+    default:
+      strength = "U broke it";
+  }
+  std::cout << "The password '" << pwd << "' is " << strength;
+}
 
 void employeeListRemoval(void) {
 	std::cout << " - employeeListRemoval: not yet implemented\n\n";
