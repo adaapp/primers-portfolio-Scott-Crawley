@@ -1,4 +1,5 @@
 #include <string>
+#include <string.h>           // For memset()
 #include <iostream>
 #include <map>
 #include <fstream>
@@ -19,8 +20,9 @@ vector<string> split(string str, char delimiter) {
     substr_start = substr_end + 1;
     substr_end = str.find(delimiter, substr_start);
   }
-  // Get last string after last delimiter
-  output.push_back(str.substr(substr_start, substr_end - substr_start));
+  // Get last string after last delimiter until null terminator
+  size_t it = str.find('\0', substr_start);
+  output.push_back(str.substr(substr_start, it - substr_start));
   return output;
 }
 
@@ -44,10 +46,13 @@ map<string, string> deserialisePhonebook(istream& file) {
   }
 
   // Read each line, split it and add each key-value pair to a map
-  while (file.getline(line, 27)) {
+  while (file.getline(line, 27, '\n')) {
     string line_str(line, 27);
     vector<string> split_str = split(line_str, ',');
     phonebook.insert(pair<string,string>(split_str[0], split_str[1]));
+
+    // Reset char array values
+    memset(line, 0, 27);
   }
   return phonebook;
 }
@@ -63,11 +68,12 @@ void phoneDirectory(void) {
 
   cout << "Please enter a name or number to search: ";
   getline(cin, input);
-  cout << "Searching " << phonebook.size() << " records...\n";
+  cout << "Searching " << phonebook.size() << " records...\n\n";
 
   // Search keys
   auto it = phonebook.find(input);
   if (it != phonebook.end()) {
+    cout << "Contact details:\n";
     cout << it->first << ", T: " << it->second;
     return;
   }
@@ -75,9 +81,13 @@ void phoneDirectory(void) {
   // Search values
   for (const auto& [key, value] : phonebook) {
     if (value == input) {
+      cout << "Contact details:\n";
       cout << key << ", T: " << value;
+      return;
     }
   }
+
+  cout << "Contact not found\n";
 }
 
 
