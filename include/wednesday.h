@@ -2,6 +2,7 @@
 #include <iostream>
 #include <map>
 #include <fstream>
+#include <vector>
 
 // Sorry, but the `std::` everywhere makes it almost unreadable! 
 using namespace std;
@@ -18,6 +19,8 @@ vector<string> split(string str, char delimiter) {
     substr_start = substr_end + 1;
     substr_end = str.find(delimiter, substr_start);
   }
+  // Get last string after last delimiter
+  output.push_back(str.substr(substr_start, substr_end - substr_start));
   return output;
 }
 
@@ -31,29 +34,36 @@ ifstream openFile(string filename) {
   }
 }
 
-map<string, string> deserialisePhonebook(ifstream file) {
+map<string, string> deserialisePhonebook(istream& file) {
   map<string, string> phonebook;
-  char line[128];
+  char line[27];
+
+  if (!file) {
+    cout << "Error opening file `contacts.csv`";
+    return phonebook;
+  }
 
   // Read each line, split it and add each key-value pair to a map
-  while (file.getline(line, 128)) {
-    string line_str(line, 128);
+  while (file.getline(line, 27)) {
+    string line_str(line, 27);
     vector<string> split_str = split(line_str, ',');
-    phonebook.insert(pair<string,string>(vector[0], vector[1]));
+    phonebook.insert(pair<string,string>(split_str[0], split_str[1]));
   }
-  file.close();
   return phonebook;
 }
 
 void phoneDirectory(void) {
 	string input;
+  map<string, string> phonebook;
+  ifstream file;
   
-  ifstream file = openFile("contacts.csv");
-  map<string, string> phonebook = deserialisePhonebook(file);
+  file = openFile("contacts.csv");
+  phonebook = deserialisePhonebook(file);
+  file.close();
 
   cout << "Please enter a name or number to search: ";
-  cin >> input;
-  cout << "Searching " << phonebook.size() << " records...";
+  getline(cin, input);
+  cout << "Searching " << phonebook.size() << " records...\n";
 
   // Search keys
   auto it = phonebook.find(input);
