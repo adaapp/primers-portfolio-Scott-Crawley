@@ -5,6 +5,8 @@
 #include <fstream>
 #include <vector>
 
+/* ====================== SHARED ====================== */
+
 // Sorry, but the `std::` everywhere makes it almost unreadable! 
 using namespace std;
 
@@ -31,10 +33,10 @@ ifstream openFile(string filename) {
   ifstream file;
 
   file.open(filename);
-  if (file.is_open()) {
-    return file;
-  }
+  return file;
 }
+
+/* ====================== PRIMER 5 ====================== */
 
 map<string, string> deserialisePhonebook(istream& file) {
   map<string, string> phonebook;
@@ -90,7 +92,68 @@ void phoneDirectory(void) {
   cout << "Contact not found\n";
 }
 
+/* ====================== PRIMER 6 ====================== */
+
+/*  -Breakdown-
+* vector<vector<string>>:
+* vector<              > = Table
+*        vector<string>  = Line
+*/
+vector<vector<string>> deserialiseSalaries(istream& file) {
+  const size_t initialSize  = 7; 
+  size_t nameMaxSize        = 0;
+  size_t salaryMaxSize      = 0;
+
+  string firstname;
+  string lastname;
+  string salary;
+  string initial;
+
+  vector<vector<string>> salaries;
+
+  if (!file) {
+    cout << "Error opening file `salaries.csv`";
+    return salaries;
+  }
+
+  while (!file.eof()) {
+    getline(file, firstname, ',');
+    getline(file, lastname, ',');
+    getline(file, salary);
+
+    initial = firstname[0];
+    initial += '.';
+    initial.resize(initialSize, ' ');
+
+    if (lastname.length() > nameMaxSize) {
+      nameMaxSize = lastname.length();
+    }
+    if (salary.length() > salaryMaxSize) {
+      salaryMaxSize = salary.length();
+    }
+
+    vector<string> v{ initial, lastname, salary };
+    salaries.push_back(v);
+  }
+    
+  // Search values
+  for (vector<string>& line : salaries) {
+    line[1].resize(nameMaxSize, ' ');
+    line[2].resize(salaryMaxSize, ' ');
+  }
+
+  return salaries;
+}
 
 void dataFileParser(void) {
-	cout << " - dataFileParser: not yet implemented\n\n";
+	ifstream file;
+  vector<vector<string>> table;
+
+  file = openFile("salaries.csv");
+  table = deserialiseSalaries(file);
+  file.close();
+
+  for (const vector<string>& line : table) {
+    cout << line[0] << line[1] << line[2] << "\n";
+  }
 }
