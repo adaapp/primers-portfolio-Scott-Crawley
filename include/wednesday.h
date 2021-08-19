@@ -116,6 +116,7 @@ vector<vector<string>> deserialiseSalaries(istream& file) {
     return salaries;
   }
 
+  // Get max lengths and store values as vectors (so we only read the file once)
   while (!file.eof()) {
     getline(file, firstname, ',');
     getline(file, lastname, ',');
@@ -123,7 +124,7 @@ vector<vector<string>> deserialiseSalaries(istream& file) {
 
     initial = firstname[0];
     initial += '.';
-    initial.resize(initialSize, ' ');
+    initial.resize(initialSize + 1, ' ');
 
     if (lastname.length() > nameMaxSize) {
       nameMaxSize = lastname.length();
@@ -136,13 +137,44 @@ vector<vector<string>> deserialiseSalaries(istream& file) {
     salaries.push_back(v);
   }
     
-  // Search values
+  // Format strings
   for (vector<string>& line : salaries) {
-    line[1].resize(nameMaxSize, ' ');
-    line[2].resize(salaryMaxSize, ' ');
+    line[1].resize(nameMaxSize + 1, ' ');
+    line[2].resize(salaryMaxSize + 1, ' ');
   }
 
   return salaries;
+}
+
+void printTable(vector<vector<string>> table) {
+  size_t initialSize;
+  size_t nameSize;
+  size_t salarySize;
+  string separator = "";
+
+  // Output table header
+  initialSize = table[0][0].length();
+  nameSize    = table[1][1].length();
+  salarySize  = table[2][2].length();
+
+  string col1("Initial");
+  string col2("Last");
+  string col3("Salary");
+
+  col1.resize(initialSize, ' ');
+  col2.resize(nameSize, ' ');
+  col3.resize(salarySize, ' ');
+  
+  cout << col1 << col2 << col3 << "\n";
+
+  // Output separators
+  separator.resize(initialSize + nameSize + salarySize, '-');
+  cout << separator << "\n";
+
+  // Output formatted table
+  for (const vector<string>& line : table) {
+    cout << line[0] << line[1] << "£" << line[2] << "\n";
+  }
 }
 
 void dataFileParser(void) {
@@ -153,7 +185,5 @@ void dataFileParser(void) {
   table = deserialiseSalaries(file);
   file.close();
 
-  for (const vector<string>& line : table) {
-    cout << line[0] << line[1] << line[2] << "\n";
-  }
+  printTable(table);
 }
