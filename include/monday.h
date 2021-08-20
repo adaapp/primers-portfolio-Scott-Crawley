@@ -72,7 +72,7 @@ void fahrenheitCentigradeConversion(void) {
   cout << "Please enter the starting temperature: ";
   while (true) {
     try {
-      cin >> inp;
+      getline(cin, inp);
       temp = stof(inp);
       break;
     } 
@@ -85,7 +85,8 @@ void fahrenheitCentigradeConversion(void) {
   cout << "\nPress 'C' to convert from Fahrenheit to Centigrade.\n";
   cout << "Press 'F' to convert from Centigrade to Fahrenheit.\n\n";
   cout << "Your choice: ";
-  cin >> choice;
+  getline(cin, inp);
+  choice = inp[0];
   converterChoice(temp, choice);
 }
 
@@ -107,13 +108,13 @@ void selfServiceCheckout(void) {
   while (quantity != 0) {
     try {
       cout << "Please enter a quantity for item " << itemNum << " (or 0 to finish): ";
-      cin >> input;
+      getline(cin, input);
       quantity = stoi(input);
 
       // Ensure it doesn't prompt for a price if they enter 0 for quantity
       if (quantity != 0) {
         cout << "Please enter item " << itemNum << "'s cost: ";
-        cin >> input;
+        getline(cin, input);
         cost = stof(input);
         subtotal += (quantity * cost);
         itemNum++;
