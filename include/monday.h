@@ -51,6 +51,7 @@ void converterChoice(float temp, char choice) {
       break;
     default:
       cout << "Not a valid option\n";
+      return;
   }
   cout << temp << " degrees " << from << " is " << conv << " " << to << "\n";
   cout << "Or " << kelv << " Kelvin\n";
