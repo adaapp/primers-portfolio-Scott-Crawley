@@ -63,6 +63,7 @@ void phoneDirectory(void) {
   cout << "Please enter a name or number to search: ";
   getline(cin, input);
 
+  // Open and search file
   file = openFile("contacts.csv");
   result = searchPhonebook(file, input);
   file.close();

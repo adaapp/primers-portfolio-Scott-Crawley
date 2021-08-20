@@ -81,6 +81,8 @@ void employeeListRemoval(void) {
   cout << "\nEnter an employee name to remove: ";
   getline(cin, input);
   
+  // Use standard library's `find` and vector's `.begin()/.end()` functions
+  // If returned iterator is not `.end()`, we found them and can erase them
   auto it = find(employees.begin(), employees.end(), input);
   if (it != employees.end()) {
     employees.erase(it);
