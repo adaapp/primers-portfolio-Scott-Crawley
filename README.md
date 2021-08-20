@@ -25,7 +25,7 @@ I had no significant issues or challenges with this primer. Only the introductio
 A simple Self-Service Checkout program to calculate the total cost of a number of items and a new 5.5% shopping tax.
 
 Example output:
-`Please enter a quantity for item 1 (or 0 to finish): 3
+```Please enter a quantity for item 1 (or 0 to finish): 3
 Please enter item 1’s cost: 0.99
 Please enter a quantity for item 2 (or 0 to finish): 2
 Please enter item 2’s cost: 1.50
@@ -35,8 +35,8 @@ Please enter a quantity for item 3 (or 0 to finish): 0
 Thank you.
 Subtotal: £8.96
 Shopping Tax: £0.4928
-Total: £9.4528`
-
+Total: £9.4528
+```
 Constraints:
 - Store the shopping tax as a constant of 5.5.
 
@@ -54,10 +54,11 @@ This challenge requires the development of a password's complexity checker with 
 • Very Strong (value: 4) – at least 8 characters; including at least 2 numeric, at least 4 alphabetic and 1 special
 
 Example Output:
-`The password ‘12345678’ is Weak
+```The password ‘12345678’ is Weak
 The password ‘AB235’ is Moderate
 The password ‘Password2021’ is Strong
-The password ‘Password2021!’ is Very Strong`
+The password ‘Password2021!’ is Very Strong
+```
 
 Constraints:
 - Calculation function that accepts a password as a passed argument and returns the value as an integer
@@ -72,7 +73,7 @@ I'm still not the most happy with the calculation conditionals but was unable to
 Tasked with: displaying a list of employee names, prompting the user for an employee name and then removing that name from the list; displaying the remaining names, each on its own line, once complete.
 
 Example output:
-`There are 5 employees:
+```There are 5 employees:
 John Smith
 Jaelynn Stuart
 Kaley Barajas
@@ -85,6 +86,7 @@ John Smith
 Kaley Barajas
 Walter Collier
 Cale Myers`
+```
 
 Constraints:
 - Using with and dealing with arrays and their constraints
@@ -96,7 +98,7 @@ Given the immutability of C++ arrays, I opted for an std::vector instead. This p
 Using an external data stream to permanently hold phone contacts, a user prompt should ask for either a name or phone number and provide any matched record(s).
 
 Example Output:
-`Please enter a name or number to search: 0203 105 0125
+```Please enter a name or number to search: 0203 105 0125
 Searching 10 records ...
 Contact details:
 Ada College, T: 0203 105 0125
@@ -109,6 +111,7 @@ Ada College, T: 0203 105 0125
 Please enter a name or number to search: 0203 105 0120
 Searching 10 records ...
 Sorry, no contact details found`
+```
 
 Constraints:
 - The contact name or number must use a single input 
@@ -117,6 +120,42 @@ Constraints:
 
 #### Reflection (as well as issues, challenges & resolutions)
 The Phone Directory challenge has been the most difficult so far. This is due to requiring several independent and generalised methods to implement its functionality: IO functionality, phonebook deserialisation and a string splitter using a specified delimiter. Fortunately, these components can be re-used for Primer 6 (and potentially others) but their introduction increases the codebase and therefore the testing needed.     
+### Primer 6 - Data File Parser
+Read and parse the following data from a file; using a formatted table to display its output:
+
+- Noak,Jaylinn,21500
+- Apollinaire,Venkata,29250
+- Faith,Mara,30000
+- Yasamin,Shukriyya,44500
+- Zahir,Marcel,31200
+- Maia,Ela,45600
+- Liam,Oliver,43300
+- Luka,Jones,45600
+- Alexander,Smith,20500
+
+Example Output:
+```
+Initial  Last            Salary
+-------- --------------- -----------
+N.       Jaylinn         £21500
+A.       Venkata         £29250
+F.       Mara            £30000
+Y.       Shukriyya       £44500
+Z.       Marcel          £31200
+M.       Ela             £45600
+L.       Oliver          £43300
+L.       Jones           £45600
+A.       Smith           £20500
+```
+
+Constraints:
+- Do not use existing libraries or code for parsing/formatting
+- Ensure columns are one space longer than longest value 
+
+#### Reflection (as well as issues, challenges & resolutions)
+Despite looking simple at first glance, this challenge required significant thought in order to maximise performance. Due to requiring the longest value to format the final output, the data needs to be iterated over once to determine that and again when formatting. I wanted to avoid reading all the data a second time but thought this was originally the only solution due to requiring a char array (buffer) of fixed size to imitate the space-formatted table. 
+
+Fortunately, `std::string`'s have the `.resize()` method. Once I discovered this, I reformatted the code to instead only read the data from the file once, store it in a `vector<std::string>` and later resize each string in the vector corresponding to the longest value. Not only was this neater, it's also significantly faster than nested or duplicated IO operations. 
 
 ---
 ## Section 2 - Programming Paradigms
