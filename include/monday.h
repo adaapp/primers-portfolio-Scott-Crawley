@@ -105,23 +105,22 @@ void selfServiceCheckout(void) {
 
   // Prompt user continuously until they enter 0
   while (quantity != 0) {
-    cout << "Please enter a quantity for item " << itemNum << " (or 0 to finish): ";
-    cin >> input;
-    quantity = stoi(input);
-
-    // Ensure it doesn't prompt for a price if they enter 0 for quantity
-    if (quantity != 0) {
-      cout << "Please enter item " << itemNum << "'s cost: ";
+    try {
+      cout << "Please enter a quantity for item " << itemNum << " (or 0 to finish): ";
       cin >> input;
-      try {
+      quantity = stoi(input);
+
+      // Ensure it doesn't prompt for a price if they enter 0 for quantity
+      if (quantity != 0) {
+        cout << "Please enter item " << itemNum << "'s cost: ";
+        cin >> input;
         cost = stof(input);
+        subtotal += (quantity * cost);
+        itemNum++;
       }
-      catch (invalid_argument ignored) {
-        cout << "Invalid integer: assuming price of £0.00\n";
-      }
-      
-      subtotal += (quantity * cost);
-      itemNum++;
+    }
+    catch (invalid_argument ignored) {
+      cout << "Invalid integer\n";
     }
   }
 
