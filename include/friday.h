@@ -10,9 +10,11 @@ class Car {
     bool engine_state;
     bool locked_state;
 
+    // Figure out words from state provided
     std::string engine_word() { return engine_state ? "On" : "Off"; }
     std::string locked_word() { return locked_state ? "Locked" : "Unlocked"; }
 
+    // Implementation of engine_on/off (reduces code duplication)
     void engine_toggle(bool state) {
       if (engine_state == state) {
         std::cout << "Sorry, the engine is already " << engine_word() << "\n";
@@ -22,6 +24,7 @@ class Car {
       std::cout << "Turning the engine " << engine_word() << "\n";
     }
   public:
+    // No point requiring engine/locked states 
     Car(std::string _colour, std::string _make) {
       colour        = _colour;
       make          = _make;
@@ -35,6 +38,7 @@ class Car {
     void set_make(std::string value) { make = value; }
     std::string get_make(void) { return make; }
 
+    // Call private function to reduce duplicate code
     void engine_on(void) { engine_toggle(true); }
     void engine_off(void) { engine_toggle(false); }
 
@@ -65,6 +69,7 @@ void carMenu(Car car) {
     std::cout << "3. Lock Car\n";
     std::cout << "4. Unlock Car\n";
     
+    // Menu option selection
     std::cout << "Please select an option (or 0 to finish): ";
     getline(std::cin, input);
     choice = input[0];
@@ -100,10 +105,13 @@ void carClass(void) {
 
 int shapeDeletions = 0;
 
+// Superclass
 class Shape {
   public:
     ~Shape() { shapeDeletions++; }
 };
+
+// Child class(es)
 class Circle: public Shape {
   public:
     float radius;
@@ -167,6 +175,7 @@ class Trapezoid: public Shape {
     }
 };
 
+// AreaOf class
 class AreaOf {
   private:
     const float PI = 3.14159;
