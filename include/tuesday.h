@@ -1,5 +1,7 @@
 #include <ctype.h>
 
+/* ====================== PRIMER 3 ====================== */
+
 int calculatePasswordStrength(std::string pwd) {
   int alphabetic  = 0;
   int digit       = 0; 
@@ -60,6 +62,8 @@ void passwordComplexityChecker(void) {
   }
   std::cout << "The password '" << pwd << "' is " << strength;
 }
+
+/* ====================== PRIMER 4 ====================== */
 
 void printEmployees(std::vector<std::string> employees) {
   int len = employees.size();

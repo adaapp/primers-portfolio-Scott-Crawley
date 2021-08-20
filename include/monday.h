@@ -1,6 +1,8 @@
 #include <ctype.h>
 #include <math.h>
 
+/* ====================== PRIMER 1 ====================== */
+
 /* Fahrenheit to Centigrade */
 float ftoc(float temp) {
   return (temp - 32) * 5 / 9;
@@ -21,13 +23,48 @@ float ctok(float temp) {
   return temp + 273.15;
 }
 
-void fahrenheitCentigradeConversion(void) {
+void converterChoice(float temp, char choice) {
+  using namespace std;
 
+  float conv  = 0.0;
+  long  kelv  = 0.0;
+  float abs0  = 0.0;
+  string from;
+  string to;
+
+  // Choice evaluation (with case insensitivity)
+  choice = tolower(choice);
+  switch (choice) {
+    case 'c':
+      kelv = ftok(temp);
+      conv = ftoc(temp);
+      abs0 = -273.15;
+      from = "Fahrenheit";
+      to   = "Centigrade";
+      break;
+    case 'f':
+      kelv = ctok(temp);
+      conv = ctof(temp);
+      abs0 = -459.67;
+      from = "Centigrade";
+      to   = "Fahrenheit";
+      break;
+    default:
+      cout << "Not a valid option\n";
+  }
+  cout << temp << " degrees " << from << " is " << conv << " " << to << "\n";
+  cout << "Or " << kelv << " Kelvin\n";
+
+  // Figure out if it's below 'absolute zero' (impossible)
+  if (conv < abs0) {
+    cout << "Breaks the laws of physics!\n";
+  }
+}
+
+void fahrenheitCentigradeConversion(void) {
   using namespace std;
  
   float temp  = 0.0;
-  float conv  = 0.0;
-  long  kelv  = 0.0;
   string inp  = "0";
   char choice = '0';
 
@@ -49,34 +86,10 @@ void fahrenheitCentigradeConversion(void) {
   cout << "Press 'F' to convert from Centigrade to Fahrenheit.\n\n";
   cout << "Your choice: ";
   cin >> choice;
-  
-  // Choice evaluation (with case insensitivity)
-  choice = tolower(choice);
-  switch (choice) {
-    case 'c':
-      conv = ftoc(temp);
-      kelv = ftok(temp);
-
-      cout << temp << " degrees Fahrenheit is " << conv << " Centigrade\n";
-      cout << "Or " << kelv << " Kelvin\n";
-      if (conv < -273.15) {
-        cout << "Breaks the laws of physics!\n";
-      }
-      break;
-    case 'f':
-      conv = ctof(temp);
-      kelv = ctok(temp);
-
-      cout << temp << " degrees Centigrade is " << conv << " Fahrenheit\n";
-      cout << "Or " << kelv << " Kelvin\n";
-      if (conv < -459.67) {
-        cout << "Breaks the laws of physics!\n";
-      }
-      break;
-    default:
-      cout << "Not a valid option\n";
-  }
+  converterChoice(temp, choice);
 }
+
+/* ====================== PRIMER 2 ====================== */
 
 void selfServiceCheckout(void) {
 
@@ -100,7 +113,12 @@ void selfServiceCheckout(void) {
     if (quantity != 0) {
       cout << "Please enter item " << itemNum << "'s cost: ";
       cin >> input;
-      cost = stof(input);
+      try {
+        cost = stof(input);
+      }
+      catch (invalid_argument ignored) {
+        cout << "Invalid integer: assuming price of £0.00\n";
+      }
       
       subtotal += (quantity * cost);
       itemNum++;

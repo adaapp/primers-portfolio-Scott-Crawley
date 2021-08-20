@@ -1,7 +1,7 @@
 #include <chrono>
 #include <thread>
 
-/* ============ PRIMER 7 ============ */
+/* ====================== PRIMER 7 ====================== */
 
 void sleep(int seconds = 10) {
   const int ms = seconds * 1000;
@@ -16,7 +16,7 @@ void sleepTimer(void) {
   t.join();
 }
 
-/* ============ PRIMER 8 ============ */
+/* ====================== PRIMER 8 ====================== */
 
 void timer1(int seconds = 5) {
   std::cout << "Thread 1: " << std::this_thread::get_id() << " started\n";
