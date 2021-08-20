@@ -97,9 +97,12 @@ void carClass(void) {
 }
 
 /* ====================== PRIMER 10 ====================== */
+
+int shapeDeletions = 0;
+
 class Shape {
   public:
-    ~Shape() { std::cout << "\nDone"; }
+    ~Shape() { shapeDeletions++; }
 };
 class Circle: public Shape {
   public:
@@ -184,9 +187,13 @@ void areaOf(void) {
   Trapezoid tz(14, 7.5, 6);
   
   // Hardcoded - would require several degrees more complexity to neaten up
-  std::cout << "Area of Circle(r = 4.5): " << areaOf.size(c);
-  std::cout << "Area of Square(a = 6.1): " << areaOf.size(s);
-  std::cout << "Area of Rectangle(w = 4, l = 5.9): " << areaOf.size(r);
-  std::cout << "Area of Triangle(b = 8, h = 12): " << areaOf.size(tl);
-  std::cout << "Area of Trapezoid(b = 14, h = 7.5, a = 6): " << areaOf.size(tz);
+  std::cout << "Area of Circle(r = 4.5): " << areaOf.size(c) << "\n";
+  std::cout << "Area of Square(a = 6.1): " << areaOf.size(s) << "\n";
+  std::cout << "Area of Rectangle(w = 4, l = 5.9): " << areaOf.size(r) << "\n";
+  std::cout << "Area of Triangle(b = 8, h = 12): " << areaOf.size(tl) << "\n";
+  std::cout << "Area of Trapezoid(b = 14, h = 7.5, a = 6): " << areaOf.size(tz) << "\n";
+
+  // Just to demonstrate the deletions and inheritance:
+  // Should always be 5
+  std::cout << "\nTotal Shapes Deleted: " << shapeDeletions << "\n";
 }
