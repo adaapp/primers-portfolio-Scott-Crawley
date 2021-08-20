@@ -97,7 +97,115 @@ void carClass(void) {
 }
 
 /* ====================== PRIMER 10 ====================== */
+class Shape {
+  protected:
+    std::string type;
+    std::string args;
+  public:
+    ~Shape() { std::cout << "\nDone"; }
+    std::string get_type(void) { return type; }
+    std::string get_args(void) { return args; }
+};
+class Circle: public Shape {
+  public:
+    float radius;
+
+    Circle() { 
+      radius  = 10; 
+      type    = "Circle";
+    }
+    Circle(float _radius) { 
+      radius  = _radius;
+      type    = "Circle";
+    }
+};
+class Square: public Shape {
+  public:
+    float length;
+
+    Square() { 
+      length  = 10; 
+      type    = "Square"; 
+    }
+    Square(float _length) { 
+      length  = _length; 
+      type    = "Square"; 
+    }
+};
+class Rectangle: public Shape {
+  public:
+    float width;
+    float height;
+
+    Rectangle() { 
+      width   = 10; 
+      height  = 10;
+      type    = "Rectangle";
+    }
+    Rectangle(float _width, float _height) { 
+      width   = _width; 
+      height  = _height;
+      type    = "Rectangle";
+    }
+};
+class Triangle: public Shape {
+  public:
+    float base;
+    float height;
+
+    Triangle() { 
+      base    = 10; 
+      height  = 10;
+      type    = "Triangle";
+    }
+    Triangle(float _base, float _height) { 
+      base    = _base;
+      height  = _height;
+      type    = "Triangle";
+    }
+};
+class Trapezoid: public Shape {
+  public:
+    float base;
+    float height;
+    float tbase;
+
+    Trapezoid() { 
+      base    = 10;
+      height  = 10;
+      tbase   = 10;
+      type    = "Trapezoid";
+    }
+    Trapezoid(float _base, float _height, float _tbase) { 
+      base    = _base;
+      height  = _height;
+      tbase   = _tbase;
+      type    = "Trapezoid";
+    }
+};
+
+class AreaOf {
+  private:
+    const float PI = 3.14159;
+  public:
+    int size(Circle c)      { return PI*(c.radius * c.radius); }
+    int size(Square s)      { return s.length * s.length; }
+    int size(Rectangle r)   { return r.width * r.height; }
+    int size(Triangle tl)   { return (tl.base * tl.height) / 2; }
+    int size(Trapezoid tz)  { return ((tz.base + tz.tbase) / 2) * tz.height; }
+};
 
 void areaOf(void) {
-		std::cout << " - areaOf: not yet implemented\n\n";
+  AreaOf areaOf;
+  Circle c(4.5);
+  Square s(6.1);
+  Rectangle r(4, 5.9);
+  Triangle tl(8, 12);
+  Trapezoid tz(14, 7.5, 6);
+
+  std::vector<Shape> shapes { c, s, r, tl, tz };
+  
+  for (Shape& s : shapes) {
+    std::cout << "Area of " << s.get_type() << "("
+  }  
 }
