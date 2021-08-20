@@ -10,7 +10,7 @@ class Car {
     bool engine_state;
     bool locked_state;
 
-    std::string engine_word() { return engine_state ? "Running" : "Off"; }
+    std::string engine_word() { return engine_state ? "On" : "Off"; }
     std::string locked_word() { return locked_state ? "Locked" : "Unlocked"; }
 
     void engine_toggle(bool state) {
@@ -86,7 +86,8 @@ void carMenu(Car car) {
         break;
       default:
         std::cout << "Invalid Option\n";
-    } 
+    }
+    std::cout << "\n";
   }
 }
 
