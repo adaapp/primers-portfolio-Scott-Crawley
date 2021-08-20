@@ -8,9 +8,7 @@ int calculatePasswordStrength(std::string pwd) {
   int special     = 0;
   int length      = pwd.length();
 
-  // <ctype.h> isalpha / isdigit
-  for (int i = 0; i < length; i++) {
-    char c = pwd[i];
+  for (char& c : pwd) {
     if (isalpha(c)) {
       alphabetic++;
     }
@@ -18,21 +16,19 @@ int calculatePasswordStrength(std::string pwd) {
       digit++;
     }
     else {
-      // Neither letter or number; it's a special char
       special++;
     }
   }
 
   // Determine strength
+  // Ternary: no special chars = 'Strong', otherwise 'Very Strong'
   if (length >= 8 && digit >= 2 && alphabetic >= 4) {
-    // Ternary: no special chars = 'Strong', otherwise 'Very Strong'
-    return special != 0 ? 4 : 3;
+    return special == 0 ? 3 : 4;
   }
-  if (length >= 4) {
-    // 'Moderate' if mixed, 'Weak' if same (length is equal to any singular type) 
-    if (!(alphabetic == length || digit == length || special == length)) {
-      return 2;
-    }
+  // Ensure mixed character types for 'Moderate'
+  // Ternary: ensure length is greater/equal to 4 before returning 'Moderate'
+  if (!(alphabetic == length || digit == length || special == length)) {
+    return length < 4 ? 1 : 2;
   }
   return 1;
 }
@@ -42,7 +38,7 @@ void passwordComplexityChecker(void) {
   std::string strength;
 
 	std::cout << "Enter a password: ";
-  std::cin >> pwd;
+  getline(std::cin, pwd);
 
   switch (calculatePasswordStrength(pwd)) {
     case 1:
@@ -60,7 +56,7 @@ void passwordComplexityChecker(void) {
     default:
       strength = "U broke it";
   }
-  std::cout << "The password '" << pwd << "' is " << strength;
+  std::cout << "The password '" << pwd << "' is " << strength << "\n";
 }
 
 /* ====================== PRIMER 4 ====================== */
