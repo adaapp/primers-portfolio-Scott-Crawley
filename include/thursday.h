@@ -32,6 +32,25 @@ void timer2(int seconds = 10) {
   std::cout << "Thread 2: " << std::this_thread::get_id() << " ended\n";
 }
 
+void joinDetachThreads2(void) {
+  std::cout << "\nPart B\n";
+
+  std::cout << "Main thread: " << std::this_thread::get_id() << " started\n";
+  
+  // Start async timer threads
+  // Lambda; see Primer 7
+  std::thread thread1( []{ timer1(); });
+  std::thread thread2( []{ timer2(); });
+  
+  // Unsubscribe to async timer threads (continuing main thread execution)
+  // Outputs after main thread completes execution
+  thread2.detach();
+  thread1.detach();
+
+  // Continued processing on main thread
+  std::cout << "Main thread: " << std::this_thread::get_id() << " ended\n";
+}
+
 void joinDetachThreads(void) {
 	std::cout << "Main thread: " << std::this_thread::get_id() << " started\n";
   
@@ -47,4 +66,5 @@ void joinDetachThreads(void) {
 
   // Continue processing on main thread (unblock)
   std::cout << "Main thread: " << std::this_thread::get_id() << " ended\n";
+  joinDetachThreads2();
 }

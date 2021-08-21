@@ -119,7 +119,8 @@ Constraints:
 - The user should be advised if no match was found
 
 #### Reflection (as well as issues, challenges & resolutions)
-The Phone Directory challenge has been the most difficult so far. This is due to requiring several independent and generalised methods to implement its functionality: IO functionality, phonebook deserialisation and a string splitter using a specified delimiter. Fortunately, these components can be re-used for Primer 6 (and potentially others) but their introduction increases the codebase and therefore the testing needed.     
+The Phone Directory challenge has been the most difficult so far. This is due to requiring several independent and generalised methods to implement its functionality: IO functionality, phonebook deserialisation and a string splitter using a specified delimiter. Fortunately, these components can be re-used for Primer 6 (and potentially others) but their introduction increases the codebase and therefore the testing needed.
+
 ### Primer 6 - Data File Parser
 Read and parse the following data from a file; using a formatted table to display its output:
 
@@ -156,6 +157,36 @@ Constraints:
 Despite looking simple at first glance, this challenge required significant thought in order to maximise performance. Due to requiring the longest value to format the final output, the data needs to be iterated over once to determine that and again when formatting. I wanted to avoid reading all the data a second time but thought this was originally the only solution due to requiring a char array (buffer) of fixed size to imitate the space-formatted table. 
 
 Fortunately, `std::string`'s have the `.resize()` method. Once I discovered this, I reformatted the code to instead only read the data from the file once, store it in a `vector<std::string>` and later resize each string in the vector corresponding to the longest value. Not only was this neater, it's also significantly faster than nested or duplicated IO operations. 
+
+### Primer 7 - Sleep Timer
+Using threads, asynchronously sleep for 10 seconds. Await the completion of this sleep timer on the main thread.
+
+Example Output:
+```
+N/A
+```
+
+Constraints:
+- The number of seconds to sleep for should be an optional parameter set, by default, to 10 seconds
+- Use `this_thread` to block the execution on the appropriate thread 
+
+#### Reflection (as well as issues, challenges & resolutions)
+This task was very simple. However, passing optional parameters to a function passed-by-reference (such as in the constructor of the `std::thread` object) requires careful consideration. The second argument in the `std::thread` constructor takes the parameter for the function reference you provide it. In the case of an optional parameter, leaving this argument empty will throw an error. In order to get around this, I had to use a lambda and make a direct call as opposed to passing-by-reference. 
+
+### Primer 8 - Joining & Detaching Threads
+Using threads, asynchronously sleep for 10 seconds. Await the completion of this sleep timer on the main thread.
+
+Example Output:
+```
+N/A
+```
+
+Constraints:
+- The number of seconds to sleep for should be an optional parameter set, by default, to 10 seconds
+- Use `this_thread` to block the execution on the appropriate thread 
+
+#### Reflection (as well as issues, challenges & resolutions)
+This task was very simple. However, passing optional parameters to a function passed-by-reference (such as in the constructor of the `std::thread` object) requires careful consideration. The second argument in the `std::thread` constructor takes the parameter for the function reference you provide it. In the case of an optional parameter, leaving this argument empty will throw an error. In order to get around this, I had to use a lambda and make a direct call as opposed to passing-by-reference. 
 
 ---
 ## Section 2 - Programming Paradigms
