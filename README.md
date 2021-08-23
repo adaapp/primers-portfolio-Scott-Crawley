@@ -173,7 +173,7 @@ Constraints:
 #### Reflection (as well as issues, challenges & resolutions)
 This task was very simple. However, passing optional parameters to a function passed-by-reference (such as in the constructor of the `std::thread` object) requires careful consideration. The second argument in the `std::thread` constructor takes the parameter for the function reference you provide it. In the case of an optional parameter, leaving this argument empty will throw an error. In order to get around this, I had to use a lambda and make a direct call as opposed to passing-by-reference. 
 
-### Primer 8 - Joining & Detaching Threads
+### Primer 8 - Joining & Detaching Threads (Part A)
 Using threads, asynchronously sleep for 10 seconds. Await the completion of this sleep timer on the main thread.
 
 Example Output:
@@ -186,7 +186,99 @@ Constraints:
 - Use `this_thread` to block the execution on the appropriate thread 
 
 #### Reflection (as well as issues, challenges & resolutions)
-This task was very simple. However, passing optional parameters to a function passed-by-reference (such as in the constructor of the `std::thread` object) requires careful consideration. The second argument in the `std::thread` constructor takes the parameter for the function reference you provide it. In the case of an optional parameter, leaving this argument empty will throw an error. In order to get around this, I had to use a lambda and make a direct call as opposed to passing-by-reference. 
+This task was very simple. However, passing optional parameters to a function passed-by-reference (such as in the constructor of the `std::thread` object) requires careful consideration. The second argument in the `std::thread` constructor takes the parameter for the function reference you provide it. In the case of an optional parameter, leaving this argument empty will throw an error. In order to get around this, I had to use a lambda and make a direct call as opposed to passing-by-reference.
+
+### Primer 8 - Joining & Detaching Threads (Part B)
+Using threads, asynchronously sleep for 10 seconds. Detach the sleeping thread(s) from the main thread and continue with execution.
+
+Example Output:
+```
+N/A
+```
+
+Constraints:
+- The same timer functions should be used as Part A
+
+#### Reflection (as well as issues, challenges & resolutions)
+No changes between Part A and Part B. Main thread output completed before the sleeping thread output due to detaching and not awaiting for completion.
+
+### Primer 9 - Car Class
+Create a Car class with the following criteria and instantiate it:
+- Private internal properties, variables, attributes
+- Public methods:
+  - void set_colour(string)
+  - string get_colour(void)
+  - void set_make(string)
+  - string get_make(void)
+  - void engine_on(void)
+  - void engine_off(void)
+  - void locked(bool)
+  - void status(void)
+
+Then create an interactive menu to make use of the car's methods.
+
+Example Output:
+```
+Car Status: colour: Blue, make: Honda, engine: Off, Unlocked
+1. Turn Engine On
+2. Turn Engine Off
+3. Lock Car
+4. Unlock Car
+Please select an option (or 0 to finish): 2
+Sorry, the engine is already off
+Car Status: colour: Blue, make: Honda, engine: Off, Unlocked
+1. Turn Engine On
+2. Turn Engine Off
+3. Lock Car
+4. Unlock Car
+Please select an option (or 0 to finish): 1
+Turning the engine on
+Car Status: colour: Blue, make: Honda, engine: Running, Unlocked
+1. Turn Engine On
+2. Turn Engine Off
+3. Lock Car
+4. Unlock Car
+Please select an option (or 0 to finish): 4
+Sorry, the car is already unlocked
+```
+
+Constraints:
+- Ensure Car constructor provides support to initialise the private properties
+- Methods that result in no change to state should ignore requests
+- Car interaction menu should not be part of the class
+
+#### Reflection (as well as issues, challenges & resolutions)
+I found no significant problems and faced no challenges for this task. During development, I opted to clean up the engine_on/off functions as well as the outputs by creating a 'parent' function which handles both functionality. This meant less code duplication and neater code.
+
+Additionally, whilst still meeting the first constraint, I chose to exclude the two private boolean properties in the Car constructor; engine_state and locked_state. It made sense to me for these to default to off and locked after initialisation, also reducing the amount of code needed to instantiate a new object. This also prevents the logical issue of creating a car that is locked but has its engine is on.    
+
+### Primer 10 - AreaOf
+Create an 'AreaOf' class that provides a single method `.size()`. This method should differentiate and correctly calculate the area of 3 - 5 different shape types from the following:
+- Rectangles
+- Circles
+- Squares
+- Triangles
+- Trapezoids 
+
+Example Output:
+```
+Area of Circle (r = 4.5): 63.6172
+Area of Square (a = 6.1): 37.21
+Area of Rectangle (w = 4, l = 5.9): 23.6
+Area of Triangle (b = 8, h = 12): 48
+Area of Trapezoid (b = 14, h = 7.5, a = 6): 75
+```
+
+Constraints:
+- Ensure all methods (except output related) are pure functions
+- Must include constructor, destructor and overload methods
+
+#### Reflection (as well as issues, challenges & resolutions)
+Figuring out the underlying structure of the shape classes was the most challenging part of this task. I wanted to make use of inheritance to simplify the different shape objects and potentially make use of the superclass' properties in an output function to prevent the need for custom outputs for different shapes...
+
+However, due to noticing the increasing complexity and over-engineering, I steered away from implementing the latter instead keeping inheritance exclusively for the destructor method. As much as I think it could be neater, due to the above the outputs were therefore hardcoded for each tested shape. This meant significantly less code and less cognitive complexity with the caveat being its inflexibility.
+
+For the 'AreaOf' class itself, `.size()` was overflown with different parameter types; one for each shape. The corresponding method then calculated the area of that specific shape and returned it.   
 
 ---
 ## Section 2 - Programming Paradigms
