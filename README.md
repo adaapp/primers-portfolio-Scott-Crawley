@@ -283,7 +283,30 @@ For the 'AreaOf' class itself, `.size()` was overflown with different parameter 
 ---
 ## Section 2 - Programming Paradigms
 ### Programming Paradigms
-Simply put, a programming paradigm, for example, procedural, object-oriented, functional, structured, declarative, imperative and event driven can be described as a specific approach used when trying to solve a problem.  Although many programming languages can (and do) support multiple paradigms this discussion will focus more specifically on the possible benefits with examples of the potential differences and similarities of five from the above list. These are ...
+Programming paradigms are approaches which a developer might adopt to create a piece of software or solve a problem. Paradigms are rarely language-dependent and instead dictate the underlying structure or layout of the code. Although there are many others, the paradigms I'll be discussing are split into one of two groups:
+
+- Imperative
+- Declarative
+
+An imperative programming paradigm explicitly states in which order operations occur and allows for 'side-effects' or state changes between different parts of the code. The two most common examples of an imperative programming paradigm are 'Object-Orientated (OOP)/Structural' and 'Procedural' programming. 
+
+OOP/Structural makes use of inheritance and polymorphism to control the exact order of operations as well as modification. Each object will contain its own state and should, typically, only be changed by code within itself, child classes and concrete classes. When implemented properly, this results in a well-structured control flow with little cognitive or code overhead and should make debugging easier due to the isolated state changes.
+
+However, OOP is usually reliant on an appropriate Software Design Pattern for object management/processing. The objects themselves need to be instantiated and processed efficiently and, in most cases, are constructed using individual pieces of data generated elsewhere. When combined with an unsuitable design pattern, the benefits of OOP can very easily be negated and the juggling of objects more of a nuisance than an improvement - especially on lower memory systems.
+
+In contrast, procedural programming is entirely based around the concept of procedures; code blocks that will complete a specific task every time they're called. This provides a good level of control whilst remaining very simple and is well-suited to 'general purpose programming' as well as independent library/module development. A side-effect of this simple structure also means a reduced memory footprint compared to other paradigms.
+
+The drawback to procedural programming is, unlike OOP, the lack of room for scaling due to its precise and strict nature. Whereas OOP provides isolated objects to process with varying degrees of complexity, procedural programming demands compliance to its structure and puts a stronger focus on operation over data. This also means more tedious debugging as state manipulation is reliant on scope and is not as traceable/predictable as object-based state changes. 
+
+A declarative programming paradigm is one that abstracts away control flow and logic for an action/process, instead stating what the outcome or process is. It is the direct opposite of an imperative programming paradigm and tries to minimise or eliminate side-effects. The two most common declarative paradigms are 'Purely Functional' and 'Logic' programming.
+
+Purely functional programming treats functions as pure and deterministic. This requires that functions always return the exact same output given an identical input and will not be influenced by any mutable state. A clear benefit of this is the software's testability; no state has to be mocked and no instances configured when writing unit tests or when adopting a Test Driven Development approach. Others have claimed this paradigm also reduces bugs as functions are more predictable and minimise side-effects.
+
+A common criticism of functional programming is the difficulty involved with upscaling. Due to the nature of functions being pure with no side-effects, greater degrees of complexity may be required to accommodate for increased demand. This will be particularly evident where concurrency is used/needed as that is fundamentally a stateful concept. Similarly, any reliance on I/O operations - another inherently stateful concept - will also break the core tenet of functional programming.
+
+Logic programming focuses on 'formal logic' and, in most cases, explicitly states rules in the form of declarative clauses such as `canfly(X) :- bird(X), not abnormal(X).`. Due to its simple syntax, logic programming can be used for introductions to programming and in education but can also be scaled up, through chaining, into complex use-cases such as artificial intelligence or natural language processing. Once the rules are declared, a query will be run against the program and its output decided using the facts provided.
+
+Fundamentally, logic programming is suited to a task - with only one explicit solution - that requires solving. As a result, this restricts the ability to develop solutions based on a generic problem or with multiple outcomes. Unlike the other paradigms discussed, logic programming will therefore typically be language dependent (with its own syntax), computationally inefficient (extensive comparisons/branches) and unable to transform, manipulate or mutate data in more traditional ways.
 
 ---
 ## Section 3 - Continued Professional Development
